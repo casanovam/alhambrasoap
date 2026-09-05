@@ -1,0 +1,190 @@
+---
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import { t, localePath, withBase, INSTAGRAM_URL, INSTAGRAM_DM_URL, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const other: Lang = lang === 'es' ? 'en' : 'es';
+const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonical = `${site}${localePath(lang)}`;
+
+const navLinks = [
+  { href: '#historia', label: d.nav.story },
+  { href: '#coleccion', label: d.nav.collection },
+  { href: '#talleres', label: d.nav.workshops },
+  { href: '#regalos', label: d.nav.gifts },
+  { href: '#contacto', label: d.nav.contact },
+];
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{d.meta.title}</title>
+    <meta name="description" content={d.meta.description} />
+    <meta name="theme-color" content="#1d2f7c" />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="es" href={`${site}${localePath('es')}`} />
+    <link rel="alternate" hreflang="en" href={`${site}${localePath('en')}`} />
+    <link rel="alternate" hreflang="x-default" href={`${site}${localePath('es')}`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={d.meta.title} />
+    <meta property="og:description" content={d.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_GB'} />
+    <meta property="og:image" content={`${site}${withBase('/og.svg')}`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: 'Alhambra Soap',
+      description: d.meta.description,
+      url: canonical,
+      sameAs: [INSTAGRAM_URL],
+      address: { '@type': 'PostalAddress', addressLocality: 'Granada', addressRegion: 'Andalucía', addressCountry: 'ES' },
+    })} />
+  </head>
+  <body>
+    <a class="skip" href="#main">{lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a>
+
+    <header class="nav" id="top">
+      <div class="wrap nav-in">
+        <a href={localePath(lang)} class="brand" aria-label="Alhambra Soap">
+          <Logo size={40} />
+        </a>
+
+        <nav class="links" aria-label={lang === 'es' ? 'Principal' : 'Main'}>
+          {navLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+        </nav>
+
+        <div class="nav-actions">
+          <a class="lang" href={localePath(other)} hreflang={other} lang={other} aria-label={other === 'en' ? 'Switch to English' : 'Cambiar a español'}>
+            <span class:list={[{ on: lang === 'es' }]}>ES</span>
+            <span class="sep">/</span>
+            <span class:list={[{ on: lang === 'en' }]}>EN</span>
+          </a>
+          <a class="btn btn-primary order" href={INSTAGRAM_DM_URL} target="_blank" rel="noopener">{d.nav.order}</a>
+          <button class="burger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu">
+            <span></span><span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile" id="mobile-menu" hidden>
+        <nav aria-label="Mobile">
+          {navLinks.map((l, i) => <a href={l.href} style={`--i:${i}`}>{l.label}</a>)}
+          <a class="btn btn-gold" href={INSTAGRAM_DM_URL} target="_blank" rel="noopener" style="--i:5">{d.nav.order}</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="wrap foot-in">
+        <div class="foot-brand">
+          <Logo size={48} color="var(--gold-2)" />
+          <p>{d.footer.tagline}</p>
+        </div>
+        <div class="foot-col">
+          <span class="foot-h">{lang === 'es' ? 'Explorar' : 'Explore'}</span>
+          {navLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+        </div>
+        <div class="foot-col">
+          <span class="foot-h">{lang === 'es' ? 'Síguenos' : 'Follow'}</span>
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener">Instagram · @alhambrasoap</a>
+          <a href="https://www.threads.net/@alhambrasoap" target="_blank" rel="noopener">Threads · @alhambrasoap</a>
+          <span class="foot-h" style="margin-top:1.2rem">{d.footer.lang}</span>
+          <a href={localePath('es')} hreflang="es">Español</a>
+          <a href={localePath('en')} hreflang="en">English</a>
+        </div>
+      </div>
+      <div class="wrap foot-bottom">
+        <span>© {new Date().getFullYear()} {d.footer.rights}</span>
+        <span class="made">✦ {d.footer.made}</span>
+      </div>
+    </footer>
+
+    <script>
+      // mobile menu
+      const burger = document.querySelector<HTMLButtonElement>('.burger');
+      const menu = document.getElementById('mobile-menu');
+      const setOpen = (open: boolean) => {
+        if (!burger || !menu) return;
+        burger.setAttribute('aria-expanded', String(open));
+        menu.hidden = !open;
+        document.body.classList.toggle('menu-open', open);
+      };
+      burger?.addEventListener('click', () => setOpen(burger.getAttribute('aria-expanded') !== 'true'));
+      menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+
+      // sticky nav shadow
+      const nav = document.querySelector('.nav');
+      const onScroll = () => nav?.classList.toggle('scrolled', window.scrollY > 24);
+      onScroll();
+      addEventListener('scroll', onScroll, { passive: true });
+
+      // reveal on scroll
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+        { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
+
+<style>
+  .skip { position: absolute; left: -999px; top: 0; background: var(--gold); color: var(--cobalt-deep); padding: 0.6rem 1rem; z-index: 100; }
+  .skip:focus { left: 1rem; top: 1rem; }
+
+  .nav { position: sticky; top: 0; z-index: 50; background: rgba(247, 242, 232, 0.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: box-shadow 0.4s, background 0.4s; }
+  .nav.scrolled { box-shadow: 0 1px 0 rgba(20, 32, 63, 0.08), 0 12px 40px -24px rgba(20, 32, 63, 0.35); background: rgba(247, 242, 232, 0.94); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 78px; }
+  .brand { color: var(--cobalt-deep); }
+  .links { display: none; gap: 2rem; }
+  .links a { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--ink-soft); position: relative; padding-block: 0.25rem; }
+  .links a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--gold); transition: right 0.4s var(--ease); }
+  .links a:hover { color: var(--cobalt); }
+  .links a:hover::after { right: 0; }
+  .nav-actions { display: flex; align-items: center; gap: 1rem; }
+  .lang { display: inline-flex; gap: 0.35rem; font-size: 0.78rem; letter-spacing: 0.14em; font-weight: 700; color: var(--ink-soft); }
+  .lang .on { color: var(--cobalt); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--gold); }
+  .lang .sep { color: var(--gold); }
+  .order { display: none; padding: 0.7rem 1.2rem; }
+  .burger { width: 42px; height: 42px; border: 1px solid rgba(20, 32, 63, 0.15); border-radius: 999px; background: transparent; display: grid; place-content: center; gap: 5px; }
+  .burger span { display: block; width: 18px; height: 1.5px; background: var(--cobalt-deep); transition: transform 0.35s var(--ease); }
+  .burger[aria-expanded="true"] span:first-child { transform: translateY(3.25px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+
+  .mobile { border-top: 1px solid rgba(20, 32, 63, 0.08); background: var(--ivory); }
+  .mobile nav { display: grid; gap: 0.25rem; padding: 1rem var(--gutter) 1.75rem; }
+  .mobile nav > a { font-family: var(--font-display); font-size: 1.9rem; padding: 0.4rem 0; color: var(--cobalt-deep); border-bottom: 1px solid rgba(20, 32, 63, 0.08); animation: drop 0.6s var(--ease) both; animation-delay: calc(var(--i) * 60ms); }
+  .mobile nav > a.btn { font-family: var(--font-body); font-size: 0.8rem; margin-top: 1rem; justify-content: center; border: 0; }
+  @keyframes drop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+  @media (min-width: 900px) {
+    .links { display: flex; }
+    .order { display: inline-flex; }
+    .burger, .mobile { display: none; }
+  }
+
+  .footer { background: var(--cobalt-deep); color: rgba(247, 242, 232, 0.8); position: relative; overflow: hidden; }
+  .footer::before { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 80% at 100% 0%, rgba(197, 162, 75, 0.14), transparent 60%); pointer-events: none; }
+  .foot-in { display: grid; gap: 2.5rem; padding-block: 4rem 2.5rem; position: relative; }
+  .foot-brand p { margin-top: 1.2rem; max-width: 34ch; font-size: 0.95rem; }
+  .foot-col { display: grid; gap: 0.5rem; align-content: start; font-size: 0.95rem; }
+  .foot-col a:hover { color: var(--gold-2); }
+  .foot-h { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-2); margin-bottom: 0.4rem; }
+  .foot-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem; padding-block: 1.5rem; border-top: 1px solid rgba(247, 242, 232, 0.12); font-size: 0.8rem; position: relative; }
+  .made { color: var(--gold-2); font-family: var(--font-display); font-style: italic; font-size: 1rem; }
+  @media (min-width: 760px) { .foot-in { grid-template-columns: 1.4fr 1fr 1fr; } }
+</style>
