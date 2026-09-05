@@ -135,7 +135,7 @@ const es = {
   },
   photos: {
     hero: 'Caja Ritual Alhambra Soap abierta: cuatro jabones azulejo y una jabonera sobre terciopelo azul, con flores de jazmín',
-    story: 'Jabón con forma de estrella de ocho puntas en azul cobalto y ocre sobre mármol',
+    story: 'Jabón octogonal Estrella de los Reyes sobre mármol, estrella azul cobalto con centro ocre',
     box: 'Caja Ritual Alhambra Soap cerrada con lazo dorado y flores de jazmín',
     qr: 'Código QR del perfil de Instagram @alhambrasoap',
     qrCaption: 'Escanea para abrir mi Instagram',
@@ -283,7 +283,7 @@ const en: typeof es = {
   },
   photos: {
     hero: 'Open Alhambra Soap Ritual box: four tile soaps and a soap dish on blue velvet, with jasmine flowers',
-    story: 'Eight-pointed star soap in cobalt blue and ochre on marble',
+    story: 'Octagonal Estrella de los Reyes soap on marble, cobalt blue star with ochre centre',
     box: 'Closed Alhambra Soap Ritual box with a gold ribbon and jasmine flowers',
     qr: 'QR code for the @alhambrasoap Instagram profile',
     qrCaption: 'Scan to open my Instagram',
