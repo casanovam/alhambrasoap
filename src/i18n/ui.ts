@@ -53,7 +53,7 @@ const es = {
     items: [
       {
         name: 'Estrella de los Reyes',
-        desc: 'Inspirada en la majestuosidad de la Sala de los Reyes, su diseño geométrico simboliza el equilibrio perfecto entre tradición y modernidad.',
+        desc: 'Jabón octogonal, la pieza principal de la colección. Inspirada en la majestuosidad de la Sala de los Reyes, su diseño geométrico simboliza el equilibrio perfecto entre tradición y modernidad. Notas que envuelven tus sentidos.',
         note: 'Azahar · Naranja · Ámbar',
       },
       {
@@ -183,7 +183,7 @@ const en: typeof es = {
     items: [
       {
         name: 'Estrella de los Reyes',
-        desc: 'Inspired by the majesty of the Hall of the Kings, its geometric design symbolises the perfect balance between tradition and modernity.',
+        desc: 'Octagonal soap, the signature piece of the collection. Inspired by the majesty of the Hall of the Kings, its geometric design symbolises the perfect balance between tradition and modernity. Notes that wrap around your senses.',
         note: 'Orange blossom · Orange · Amber',
       },
       {
