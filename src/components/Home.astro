@@ -182,6 +182,30 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   </div>
 </section>
 
+<!-- ───────────────────────── GIFTS ───────────────────────── -->
+<section class="gifts" id="regalos">
+  <Pattern id="p-gift" opacity={0.18} color="#e3c878" />
+  <div class="wrap gifts-in">
+    <div class="gifts-tile reveal" aria-hidden="true"><Tile variant="pajaritas" size="100%" /></div>
+    <div class="gifts-copy">
+      <span class="eyebrow light reveal">{d.gifts.eyebrow}</span>
+      <h2 class="title reveal" data-delay="1">{d.gifts.title}</h2>
+      <p class="reveal" data-delay="2">{d.gifts.text}</p>
+      <a class="btn btn-gold reveal" data-delay="3" href={INSTAGRAM_DM_URL} target="_blank" rel="noopener"><Fragment set:html={igIcon} /> {d.gifts.cta}</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <ul class="gifts-more">
+      {d.gifts.more.map((g, i) => (
+        <li class="reveal" data-delay={String(i + 1)}>
+          <h3>{g.t}</h3>
+          <p>{g.d}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
 <!-- ───────────────────────── TESTIMONIALS ───────────────────────── -->
 <section class="section testimonials">
   <TornEdge fill="#efe7d7" seed={21} />
@@ -362,6 +386,20 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .step h3 { font-size: 1.7rem; color: var(--cobalt-deep); }
   .step p { color: var(--ink-soft); margin-top: 0.2rem; }
   @media (min-width: 900px) { .ws-grid { grid-template-columns: 1fr 1fr; gap: 5rem; } }
+
+  /* ── Gifts ── */
+  .gifts { position: relative; overflow: hidden; background: linear-gradient(135deg, #22368a 0%, #101c4f 70%); color: var(--ivory); padding-block: clamp(4rem, 8vw, 7rem); }
+  .gifts-in { position: relative; display: grid; gap: 2.5rem; align-items: center; }
+  .gifts-tile { width: min(60%, 280px); justify-self: center; animation: float 9s ease-in-out infinite; }
+  .gifts .eyebrow.light { color: var(--gold-2); }
+  .gifts .eyebrow.light::before { background: var(--gold-2); }
+  .gifts .title { margin-block: 1rem 1.2rem; color: var(--ivory); }
+  .gifts p { color: rgba(247, 242, 232, 0.82); max-width: 52ch; margin-bottom: 1.8rem; }
+  @media (min-width: 900px) { .gifts-in { grid-template-columns: 0.7fr 1.3fr; gap: 4rem; } }
+  .gifts-more { position: relative; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(227, 200, 120, 0.25); }
+  .gifts-more li { padding: 1.4rem 1.5rem; border: 1px solid rgba(227, 200, 120, 0.3); border-radius: 10px; background: rgba(255, 255, 255, 0.04); }
+  .gifts-more h3 { font-size: 1.5rem; color: var(--gold-2); }
+  .gifts-more p { font-size: 0.92rem; margin: 0.4rem 0 0; }
 
   /* ── Testimonials ── */
   .testimonials { background: var(--ivory-2); position: relative; }
