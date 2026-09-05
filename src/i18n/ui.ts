@@ -131,6 +131,23 @@ const es = {
     location: 'Granada, Andalucía',
     hours: 'Made in Granada',
   },
+  photos: {
+    hero: 'Caja Ritual Alhambra Soap abierta: cuatro jabones azulejo y una jabonera sobre terciopelo azul, con flores de jazmín',
+    story: 'Jabón con forma de estrella de ocho puntas en azul cobalto y ocre sobre mármol',
+    box: 'Caja Ritual Alhambra Soap cerrada con lazo dorado y flores de jazmín',
+    qr: 'Código QR del perfil de Instagram @alhambrasoap',
+    qrCaption: 'Escanea para abrir nuestro Instagram',
+  },
+  gallery: {
+    eyebrow: 'Más piezas',
+    title: 'Otros azulejos de la colección',
+    items: [
+      { img: 'trilobulado.jpg', caption: 'Pieza trilobulada con pajaritas y estrellas' },
+      { img: 'cuadrados.jpg', caption: 'Alicatado de cuadrados en verde, azul, negro y ocre' },
+      { img: 'estrella-ocho-puntas.jpg', caption: 'Estrella de ocho puntas' },
+      { img: 'granadas.jpg', caption: 'Granadas de jabón en cuerda de yute' },
+    ],
+  },
   footer: {
     tagline: 'Desde los muros de la Alhambra hasta tu piel. Jabones artesanales hechos a mano en Granada.',
     made: 'Hecho con cariño en Granada',
@@ -260,6 +277,23 @@ const en: typeof es = {
     igCta: 'Open Instagram',
     location: 'Granada, Andalusia',
     hours: 'Made in Granada',
+  },
+  photos: {
+    hero: 'Open Alhambra Soap Ritual box: four tile soaps and a soap dish on blue velvet, with jasmine flowers',
+    story: 'Eight-pointed star soap in cobalt blue and ochre on marble',
+    box: 'Closed Alhambra Soap Ritual box with a gold ribbon and jasmine flowers',
+    qr: 'QR code for the @alhambrasoap Instagram profile',
+    qrCaption: 'Scan to open our Instagram',
+  },
+  gallery: {
+    eyebrow: 'More pieces',
+    title: 'Other tiles in the collection',
+    items: [
+      { img: 'trilobulado.jpg', caption: 'Three-lobed piece with pajaritas and stars' },
+      { img: 'cuadrados.jpg', caption: 'Square tilework in green, blue, black and ochre' },
+      { img: 'estrella-ocho-puntas.jpg', caption: 'Eight-pointed star' },
+      { img: 'granadas.jpg', caption: 'Pomegranate soaps on jute string' },
+    ],
   },
   footer: {
     tagline: 'From the walls of the Alhambra to your skin. Handmade soaps made in Granada.',

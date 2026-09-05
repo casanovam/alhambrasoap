@@ -41,12 +41,16 @@ src/
 public/                 ← favicon, imagen Open Graph, fotos
 ```
 
-### Sustituir ilustraciones por fotos reales
+### Fotos
 
-Las tarjetas de producto usan ilustraciones SVG (`Tile.astro`). Para usar fotos de Instagram:
-
-1. Copia las fotos en `public/images/`.
-2. En `Home.astro`, dentro de `.product-art`, sustituye `<Tile … />` por `<img src={withBase('/images/foto.jpg')} alt="…" />`.
+- `photos/` guarda los originales tal cual llegaron (WhatsApp). No se publican.
+- `public/images/` contiene las versiones optimizadas y recortadas que usa la web (máx. 1000 px, JPEG ~80 %).
+  Nombres: `ritual-caja-abierta.jpg` (hero y Open Graph), `estrella-de-los-reyes.jpg`, `pajaritas.jpg`, `jabonera.jpg`
+  (recorte de la caja abierta), `ritual-caja-cerrada.jpg`, `trilobulado.jpg`, `cuadrados.jpg`, `estrella-ocho-puntas.jpg`,
+  `granadas.jpg`, `instagram-qr.jpg`.
+- Para cambiar una foto: sustituye el archivo en `public/images/` con el mismo nombre, o edita la referencia en `Home.astro`
+  (`productPhotos`, `gallery`) y el texto alternativo en `ui.ts` (`photos`, `gallery`).
+- Optimizar en macOS sin instalar nada: `sips -Z 1000 -s format jpeg -s formatOptions 80 origen.jpg --out public/images/nombre.jpg`.
 
 ### Cambiar textos, productos o testimonios
 
