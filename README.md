@@ -38,19 +38,25 @@ src/
   styles/global.css     ← paleta, tipografía, utilidades
   pages/index.astro     ← /      (es)
   pages/en/index.astro  ← /en/   (en)
-public/                 ← favicon, imagen Open Graph, fotos
+src/assets/images/      ← fotos (Astro genera AVIF/WebP y srcset al compilar)
+public/                 ← favicon e imagen Open Graph
 ```
 
 ### Fotos
 
 - `photos/` guarda los originales tal cual llegaron (WhatsApp). No se publican.
-- `public/images/` contiene las versiones optimizadas y recortadas que usa la web (máx. 1000 px, JPEG ~80 %).
-  Nombres: `ritual-caja-abierta.jpg` (hero y Open Graph), `estrella-de-los-reyes.jpg`, `pajaritas.jpg`, `jabonera.jpg`
-  (recorte de la caja abierta), `ritual-caja-cerrada.jpg`, `trilobulado.jpg`, `cuadrados.jpg`, `estrella-ocho-puntas.jpg`,
-  `granadas.jpg`, `instagram-qr.jpg`.
-- Para cambiar una foto: sustituye el archivo en `public/images/` con el mismo nombre, o edita la referencia en `Home.astro`
+- `src/assets/images/` contiene los recortes que usa la web. Astro genera automáticamente AVIF, WebP y varios tamaños
+  (`srcset`) en cada build, así que basta con dejar ahí un JPEG de buena resolución (1000 a 1600 px de ancho).
+  Nombres actuales: `ritual-caja-abierta.jpg` (hero), `estrella-de-los-reyes.jpg`, `pajaritas.jpg`, `jabonera.jpg`,
+  `ritual-caja-cerrada.jpg`, `trilobulado.jpg`, `cuadrados.jpg`, `estrella-ocho-puntas.jpg`, `instagram-qr.jpg`.
+- **Retrato de Belén:** guarda una foto cuadrada como `src/assets/images/belen.jpg` (retrato o manos en el molde)
+  y aparecerá sola junto a la firma en la sección "Quién hay detrás". Si el archivo no existe, la firma se muestra sin foto.
+- **Pendiente de refotografiar** sobre el mismo mármol y con la misma luz: la jabonera (ahora es un recorte de la foto de
+  la caja abierta, sale blanda en pantallas retina) y las granadas de jabón (retiradas de la galería por no encajar con el
+  resto de fotos; el original sigue en `photos/`).
+- Para cambiar una foto: sustituye el archivo con el mismo nombre, o edita la referencia en `Home.astro`
   (`productPhotos`, `gallery`) y el texto alternativo en `ui.ts` (`photos`, `gallery`).
-- Optimizar en macOS sin instalar nada: `sips -Z 1000 -s format jpeg -s formatOptions 80 origen.jpg --out public/images/nombre.jpg`.
+- `public/og.jpg` es la imagen para redes sociales (1200×630) y se sirve tal cual.
 
 ### Cambiar textos, productos o testimonios
 

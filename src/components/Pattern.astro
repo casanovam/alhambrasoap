@@ -1,11 +1,12 @@
 ---
 /** Nasrid eight-point star lattice, used as a faint background layer. */
-interface Props { id?: string; color?: string; opacity?: number; class?: string }
-const { id = 'nasrid', color = '#c5a24b', opacity = 0.16, class: cls = '' } = Astro.props;
+interface Props { id?: string; color?: string; opacity?: number; scale?: number; class?: string }
+const { id = 'nasrid', color = '#c5a24b', opacity = 0.16, scale = 1, class: cls = '' } = Astro.props;
+const size = 80 * scale;
 ---
 <svg class={`pattern ${cls}`} aria-hidden="true" style={`opacity:${opacity}`}>
   <defs>
-    <pattern id={id} width="80" height="80" patternUnits="userSpaceOnUse">
+    <pattern id={id} width={size} height={size} patternUnits="userSpaceOnUse" patternTransform={`scale(${scale})`}>
       <g fill="none" stroke={color} stroke-width="0.9">
         <path d="M40 4 L52 28 L76 40 L52 52 L40 76 L28 52 L4 40 L28 28 Z"/>
         <path d="M22 22 H58 V58 H22 Z"/>
