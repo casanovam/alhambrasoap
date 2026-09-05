@@ -10,6 +10,47 @@ const sq = (r: number) => `M${50 - r} ${50 - r} H${50 + r} V${50 + r} H${50 - r}
 const dia = (r: number) => `M50 ${50 - r * 1.4142} L${50 + r * 1.4142} 50 L50 ${50 + r * 1.4142} L${50 - r * 1.4142} 50 Z`;
 const oct = 'M31 8 H69 L92 31 V69 L69 92 H31 L8 69 V31 Z';
 const hex = 'M50 6 L88 28 V72 L50 94 L12 72 V28 Z';
+
+/**
+ * "Pajarita nazarí": the Alhambra's bird-shaped tessellation. Each equilateral
+ * triangle of a lattice has every edge replaced by two half-arcs (one bulging
+ * out, one in), so the pieces interlock like birds in flight.
+ */
+type Pt = [number, number];
+function pajarita(tri: Pt[]): string {
+  const cx = (tri[0][0] + tri[1][0] + tri[2][0]) / 3;
+  const cy = (tri[0][1] + tri[1][1] + tri[2][1]) / 3;
+  // enforce consistent orientation so neighbours interlock
+  const area = (tri[1][0] - tri[0][0]) * (tri[2][1] - tri[0][1]) - (tri[2][0] - tri[0][0]) * (tri[1][1] - tri[0][1]);
+  const t = area < 0 ? [tri[0], tri[2], tri[1]] : tri;
+  let d = `M${t[0][0].toFixed(2)} ${t[0][1].toFixed(2)}`;
+  for (let k = 0; k < 3; k++) {
+    const P = t[k], Q = t[(k + 1) % 3];
+    const M: Pt = [(P[0] + Q[0]) / 2, (P[1] + Q[1]) / 2];
+    const len = Math.hypot(Q[0] - P[0], Q[1] - P[1]);
+    let nx = -(Q[1] - P[1]) / len, ny = (Q[0] - P[0]) / len;
+    if (nx * (M[0] - cx) + ny * (M[1] - cy) < 0) { nx = -nx; ny = -ny; } // outward
+    const h = (len / 4) * (4 / 3); // cubic ≈ semicircle of radius len/4
+    const seg = (a: Pt, b: Pt, sgn: number) =>
+      ` C${(a[0] + sgn * nx * h).toFixed(2)} ${(a[1] + sgn * ny * h).toFixed(2)} ${(b[0] + sgn * nx * h).toFixed(2)} ${(b[1] + sgn * ny * h).toFixed(2)} ${b[0].toFixed(2)} ${b[1].toFixed(2)}`;
+    d += seg(P, M, 1) + seg(M, Q, -1);
+  }
+  return d + ' Z';
+}
+const pajaritas: { d: string; fill: string }[] = [];
+{
+  const S = 19, H = (S * Math.sqrt(3)) / 2;
+  const palette = ['#1d2f7c', '#2e6a4e', '#c9862b', '#1d2f7c', '#16161a', '#2e6a4e'];
+  const P = (i: number, j: number): Pt => [50 + i * S + (j % 2 ? S / 2 : 0), 50 + j * H];
+  for (let j = -3; j < 3; j++) {
+    for (let i = -4; i <= 3; i++) {
+      const apex = (ii: number): Pt => (j % 2 ? P(ii + 1, j + 1) : P(ii, j + 1));
+      // triangle with base on row j (coloured bird) and the one with base on row j+1 (cream bird)
+      pajaritas.push({ d: pajarita([P(i, j), P(i + 1, j), apex(i)]), fill: palette[(((i + 2 * j) % 6) + 6) % 6] });
+      pajaritas.push({ d: pajarita([P(i, j), apex(i - 1), apex(i)]), fill: '#f7f2e8' });
+    }
+  }
+}
 ---
 <svg class={`tile ${cls}`} width={size} height={size} viewBox="0 0 100 100" aria-hidden="true" data-variant={variant}>
   <defs>
@@ -54,18 +95,12 @@ const hex = 'M50 6 L88 28 V72 L50 94 L12 72 V28 Z';
 
   {variant === 'pajaritas' && (
     <g filter={shadow ? 'url(#tile-shadow)' : undefined}>
+      <clipPath id="paj-clip"><path d={hex} /></clipPath>
       <path d={hex} fill={`url(#soap-${variant})`} stroke="#d8cfb8" stroke-width=".8"/>
-      <!-- four curved bow-ties ("pajaritas") spinning around a central star -->
-      <g transform="translate(50 50)">
-        <path d="M0 -8 C 8 -16, 18 -22, 30 -20 C 22 -14, 18 -8, 16 0 C 10 -2, 4 -4, 0 -8 Z" fill="#1d2f7c"/>
-        <path d="M0 -8 C 8 -16, 18 -22, 30 -20 C 22 -14, 18 -8, 16 0 C 10 -2, 4 -4, 0 -8 Z" fill="#2e6a4e" transform="rotate(90)"/>
-        <path d="M0 -8 C 8 -16, 18 -22, 30 -20 C 22 -14, 18 -8, 16 0 C 10 -2, 4 -4, 0 -8 Z" fill="#c9862b" transform="rotate(180)"/>
-        <path d="M0 -8 C 8 -16, 18 -22, 30 -20 C 22 -14, 18 -8, 16 0 C 10 -2, 4 -4, 0 -8 Z" fill="#1d2f7c" transform="rotate(270)"/>
-        <path d="M0 -8 C -8 -16, -18 -22, -30 -20 C -22 -14, -18 -8, -16 0 C -10 -2, -4 -4, 0 -8 Z" fill="#16161a" opacity=".85"/>
-        <path d="M0 -8 C -8 -16, -18 -22, -30 -20 C -22 -14, -18 -8, -16 0 C -10 -2, -4 -4, 0 -8 Z" fill="#16161a" opacity=".85" transform="rotate(180)"/>
+      <g clip-path="url(#paj-clip)" stroke="#f7f2e8" stroke-width=".6" stroke-linejoin="round">
+        {pajaritas.map((b) => <path d={b.d} fill={b.fill} />)}
       </g>
-      <path d={sq(6)} fill="#1d2f7c"/><path d={dia(6)} fill="#1d2f7c"/>
-      <g fill="#2e6a4e"><circle cx="50" cy="14" r="2.4"/><circle cx="50" cy="86" r="2.4"/><circle cx="19" cy="32" r="2.4"/><circle cx="81" cy="32" r="2.4"/><circle cx="19" cy="68" r="2.4"/><circle cx="81" cy="68" r="2.4"/></g>
+      <path d={hex} fill="none" stroke="#d8cfb8" stroke-width=".8"/>
     </g>
   )}
 

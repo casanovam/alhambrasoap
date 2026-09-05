@@ -58,7 +58,7 @@ const es = {
       },
       {
         name: 'Pajaritas',
-        desc: 'Captura la ligereza y el dinamismo de los patrones del Patio de los Arrayanes: un movimiento continuo, como un susurro de agua recorriendo el Generalife.',
+        desc: 'Jabón hexagonal con las pajaritas nazaríes del Patio de los Arrayanes: una pieza que captura la ligereza y el dinamismo de sus patrones. Su diseño dibuja un movimiento continuo, como un susurro de agua recorriendo los jardines del Generalife. Arte y naturaleza en perfecta armonía; frescura luminosa y serenidad en cada uso.',
         note: 'Lavanda · Limón',
       },
       {
@@ -188,7 +188,7 @@ const en: typeof es = {
       },
       {
         name: 'Pajaritas',
-        desc: 'Captures the lightness and movement of the patterns in the Court of the Myrtles: a continuous flow, like a whisper of water running through the Generalife.',
+        desc: 'Hexagonal soap with the Nasrid "pajaritas", the little-bird tessellation of the Court of the Myrtles: a piece that captures the lightness and movement of its patterns. Its design draws a continuous motion, like a whisper of water running through the Generalife gardens. Art and nature in perfect harmony; luminous freshness and serenity with every use.',
         note: 'Lavender · Lemon',
       },
       {
