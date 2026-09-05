@@ -2,12 +2,12 @@
 import Tile from './Tile.astro';
 import Pattern from './Pattern.astro';
 import Logo from './Logo.astro';
-import { t, INSTAGRAM_URL, INSTAGRAM_DM_URL, type Lang } from '../i18n/ui';
+import { t, INSTAGRAM_URL, INSTAGRAM_DM_URL, INSTAGRAM_HIGHLIGHTS, type Lang } from '../i18n/ui';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const d = t(lang);
-const tileVariants = ['star', 'knot', 'sebka', 'dish'] as const;
+const tileVariants = ['star', 'pajaritas', 'dish', 'sebka'] as const;
 const igIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>`;
 const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
 ---
@@ -33,7 +33,7 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
         <div class="ribbon"></div>
         <div class="tiles">
           <div class="t t1"><Tile variant="star" size="100%" /></div>
-          <div class="t t2"><Tile variant="knot" size="100%" /></div>
+          <div class="t t2"><Tile variant="pajaritas" size="100%" /></div>
           <div class="t t3"><Tile variant="sebka" size="100%" /></div>
           <div class="t t4"><Tile variant="dish" size="100%" /></div>
         </div>
@@ -171,13 +171,23 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <section class="gifts" id="regalos">
   <Pattern id="p-gift" opacity={0.18} color="#e3c878" />
   <div class="wrap gifts-in">
-    <div class="gifts-tile reveal" aria-hidden="true"><Tile variant="knot" size="100%" /></div>
+    <div class="gifts-tile reveal" aria-hidden="true"><Tile variant="pajaritas" size="100%" /></div>
     <div class="gifts-copy">
       <span class="eyebrow light reveal">{d.gifts.eyebrow}</span>
       <h2 class="title reveal" data-delay="1">{d.gifts.title}</h2>
       <p class="reveal" data-delay="2">{d.gifts.text}</p>
       <a class="btn btn-gold reveal" data-delay="3" href={INSTAGRAM_DM_URL} target="_blank" rel="noopener"><Fragment set:html={igIcon} /> {d.gifts.cta}</a>
     </div>
+  </div>
+  <div class="wrap">
+    <ul class="gifts-more">
+      {d.gifts.more.map((g, i) => (
+        <li class="reveal" data-delay={String(i + 1)}>
+          <h3>{g.t}</h3>
+          <p>{g.d}</p>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 
@@ -197,6 +207,10 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
         </li>
       ))}
     </ul>
+    <p class="t-source reveal">
+      <span>{d.testimonials.source}</span>
+      <a href={INSTAGRAM_HIGHLIGHTS.testimonios} target="_blank" rel="noopener">{d.testimonials.more} <Fragment set:html={arrow} /></a>
+    </p>
   </div>
 </section>
 
@@ -206,6 +220,7 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     <div class="ornament reveal"><span class="eyebrow" style="color:var(--gold-3)">{d.press.eyebrow}</span></div>
     <ul class="press-list reveal" data-delay="1">
       {d.press.items.map((p) => <li>{p}</li>)}
+      <li class="press-link"><a href={INSTAGRAM_HIGHLIGHTS.prensa} target="_blank" rel="noopener">{d.press.more} <Fragment set:html={arrow} /></a></li>
     </ul>
   </div>
 </section>
@@ -235,10 +250,10 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
         </div>
         <div class="ig-grid">
           <span class="ig-cell c1"><Tile variant="star" size="70%" shadow={false} /></span>
-          <span class="ig-cell c2"><Tile variant="knot" size="70%" shadow={false} /></span>
+          <span class="ig-cell c2"><Tile variant="pajaritas" size="70%" shadow={false} /></span>
           <span class="ig-cell c3"><Tile variant="sebka" size="70%" shadow={false} /></span>
           <span class="ig-cell c4"><Tile variant="dish" size="70%" shadow={false} /></span>
-          <span class="ig-cell c5"><Tile variant="knot" size="70%" shadow={false} /></span>
+          <span class="ig-cell c5"><Tile variant="pajaritas" size="70%" shadow={false} /></span>
           <span class="ig-cell c6"><Tile variant="star" size="70%" shadow={false} /></span>
         </div>
         <div class="ig-bio">
@@ -256,7 +271,7 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .hero { position: relative; overflow: hidden; background: linear-gradient(180deg, var(--ivory) 0%, var(--ivory-2) 100%); }
   .hero::after { content: ''; position: absolute; inset: auto -20% -40% auto; width: 60vw; height: 60vw; border-radius: 50%; background: radial-gradient(closest-side, rgba(197, 162, 75, 0.22), transparent); pointer-events: none; }
   .hero-in { position: relative; display: grid; gap: 3rem; padding-block: clamp(3rem, 7vw, 6rem) clamp(4rem, 8vw, 7rem); align-items: center; }
-  .hero-title { font-size: clamp(3rem, 9vw, 6.4rem); line-height: 0.98; margin-block: 1.2rem 1.6rem; color: var(--cobalt-deep); }
+  .hero-title { font-size: clamp(2.8rem, 7.2vw, 5.4rem); line-height: 0.98; margin-block: 1.2rem 1.6rem; color: var(--cobalt-deep); }
   .hero-title > span { display: block; overflow: hidden; }
   .hero-title .it { font-style: italic; font-weight: 400; color: var(--cobalt); }
   .hero-cta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
@@ -380,6 +395,10 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .gifts .title { margin-block: 1rem 1.2rem; color: var(--ivory); }
   .gifts p { color: rgba(247, 242, 232, 0.82); max-width: 52ch; margin-bottom: 1.8rem; }
   @media (min-width: 900px) { .gifts-in { grid-template-columns: 0.7fr 1.3fr; gap: 4rem; } }
+  .gifts-more { position: relative; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(227, 200, 120, 0.25); }
+  .gifts-more li { padding: 1.4rem 1.5rem; border: 1px solid rgba(227, 200, 120, 0.3); border-radius: 10px; background: rgba(255, 255, 255, 0.04); }
+  .gifts-more h3 { font-size: 1.5rem; color: var(--gold-2); }
+  .gifts-more p { font-size: 0.92rem; margin: 0.4rem 0 0; }
 
   /* ── Testimonials ── */
   .testimonials { background: var(--ivory-2); }
@@ -387,12 +406,19 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .q { position: relative; background: var(--ivory); padding: 2.4rem 1.8rem 1.8rem; border-radius: 10px; border: 1px solid rgba(20, 32, 63, 0.08); }
   .q-mark { position: absolute; top: -0.4rem; left: 1.4rem; font-family: var(--font-display); font-size: 5rem; line-height: 1; color: var(--gold); }
   .q p { font-family: var(--font-display); font-size: 1.35rem; line-height: 1.35; color: var(--ink); }
+  .t-source { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem 1.5rem; margin-top: 1.6rem; font-size: 0.82rem; color: var(--ink-soft); }
+  .t-source a { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--cobalt); font-weight: 600; }
+  .t-source a :global(svg) { width: 1em; height: 1em; }
+  .t-source a:hover { color: var(--gold-3); }
   .q cite { display: block; margin-top: 1.2rem; font-style: normal; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-3); font-weight: 700; }
 
   /* ── Press ── */
   .press { padding-block: 3rem 3.5rem; background: var(--ivory); }
   .press-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem 3rem; margin-top: 1.8rem; }
   .press-list li { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink-soft); opacity: 0.7; letter-spacing: 0.02em; }
+  .press-list .press-link { font-family: var(--font-body); font-size: 0.82rem; opacity: 1; display: inline-flex; align-items: center; }
+  .press-list .press-link a { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--cobalt); font-weight: 600; }
+  .press-list .press-link a :global(svg) { width: 1em; height: 1em; }
 
   /* ── Contact ── */
   .contact { background: var(--ivory); border-top: 1px solid rgba(20, 32, 63, 0.08); }

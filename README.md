@@ -52,6 +52,12 @@ Las tarjetas de producto usan ilustraciones SVG (`Tile.astro`). Para usar fotos 
 
 Todo está en `src/i18n/ui.ts`. Cada clave existe en `es` y en `en`; TypeScript avisa si falta alguna.
 
+Los textos actuales provienen del perfil público de Instagram (bio, pies de foto y comentarios públicos, junio 2026):
+nombres de producto (Estrella de los Reyes, Pajaritas, jabonera a juego, Ritual de 4 jabones), talleres (casi 3 h, aceites
+esenciales de Sierra Nevada, brunch marroquí), Ritual Profe, bodas/eventos, hoteles, y tres comentarios reales como testimonios.
+Los destacados de Instagram (Testimonios, Prensa, Regalo Profes, Made in Granada) requieren inicio de sesión, así que se enlazan
+desde la web en lugar de copiarse (`INSTAGRAM_HIGHLIGHTS` en `ui.ts`).
+
 ## Publicar en GitHub Pages
 
 El flujo `.github/workflows/deploy.yml` compila y publica automáticamente en cada `push` a `main`.

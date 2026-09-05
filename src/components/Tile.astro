@@ -2,7 +2,7 @@
 /**
  * Illustrated Nasrid soap tiles (pure SVG). Variants: star | knot | sebka | dish
  */
-interface Props { variant?: 'star' | 'knot' | 'sebka' | 'dish'; size?: number | string; class?: string; shadow?: boolean }
+interface Props { variant?: 'star' | 'knot' | 'sebka' | 'dish' | 'pajaritas'; size?: number | string; class?: string; shadow?: boolean }
 const { variant = 'star', size = 200, class: cls = '', shadow = true } = Astro.props;
 
 // eight-pointed star = two squares rotated 45°
@@ -48,6 +48,24 @@ const hex = 'M50 6 L88 28 V72 L50 94 L12 72 V28 Z';
       </g>
       <path d={sq(6)} fill="#1d2f7c"/><path d={dia(6)} fill="#1d2f7c"/>
       <g fill="#1d2f7c"><circle cx="50" cy="13" r="2.4"/><circle cx="50" cy="87" r="2.4"/><circle cx="18" cy="31" r="2.4"/><circle cx="82" cy="31" r="2.4"/><circle cx="18" cy="69" r="2.4"/><circle cx="82" cy="69" r="2.4"/></g>
+    </g>
+  )}
+
+
+  {variant === 'pajaritas' && (
+    <g filter={shadow ? 'url(#tile-shadow)' : undefined}>
+      <path d={hex} fill={`url(#soap-${variant})`} stroke="#d8cfb8" stroke-width=".8"/>
+      <!-- four curved bow-ties ("pajaritas") spinning around a central star -->
+      <g transform="translate(50 50)">
+        <path d="M0 -8 C 8 -16, 18 -22, 30 -20 C 22 -14, 18 -8, 16 0 C 10 -2, 4 -4, 0 -8 Z" fill="#1d2f7c"/>
+        <path d="M0 -8 C 8 -16, 18 -22, 30 -20 C 22 -14, 18 -8, 16 0 C 10 -2, 4 -4, 0 -8 Z" fill="#2e6a4e" transform="rotate(90)"/>
+        <path d="M0 -8 C 8 -16, 18 -22, 30 -20 C 22 -14, 18 -8, 16 0 C 10 -2, 4 -4, 0 -8 Z" fill="#c9862b" transform="rotate(180)"/>
+        <path d="M0 -8 C 8 -16, 18 -22, 30 -20 C 22 -14, 18 -8, 16 0 C 10 -2, 4 -4, 0 -8 Z" fill="#1d2f7c" transform="rotate(270)"/>
+        <path d="M0 -8 C -8 -16, -18 -22, -30 -20 C -22 -14, -18 -8, -16 0 C -10 -2, -4 -4, 0 -8 Z" fill="#16161a" opacity=".85"/>
+        <path d="M0 -8 C -8 -16, -18 -22, -30 -20 C -22 -14, -18 -8, -16 0 C -10 -2, -4 -4, 0 -8 Z" fill="#16161a" opacity=".85" transform="rotate(180)"/>
+      </g>
+      <path d={sq(6)} fill="#1d2f7c"/><path d={dia(6)} fill="#1d2f7c"/>
+      <g fill="#2e6a4e"><circle cx="50" cy="14" r="2.4"/><circle cx="50" cy="86" r="2.4"/><circle cx="19" cy="32" r="2.4"/><circle cx="81" cy="32" r="2.4"/><circle cx="19" cy="68" r="2.4"/><circle cx="81" cy="68" r="2.4"/></g>
     </g>
   )}
 

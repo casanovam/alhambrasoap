@@ -137,7 +137,16 @@ const navLinks = [
         (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
         { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
       );
-      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+      const reveals = Array.from(document.querySelectorAll('.reveal'));
+      reveals.forEach((el) => io.observe(el));
+      // Fallback for browsers/situations where IntersectionObserver is late (anchor jumps, bfcache restores)
+      const sweep = () => {
+        const limit = window.innerHeight * 0.92;
+        reveals.forEach((el) => { if (!el.classList.contains('in') && el.getBoundingClientRect().top < limit) el.classList.add('in'); });
+      };
+      addEventListener('scroll', sweep, { passive: true });
+      addEventListener('pageshow', sweep);
+      setTimeout(sweep, 400);
     </script>
   </body>
 </html>
