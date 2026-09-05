@@ -70,6 +70,20 @@ Activa Pages en el repositorio: **Settings → Pages → Source: GitHub Actions*
 El sitio se sirve bajo `https://<usuario>.github.io/alhambrasoap/`; el workflow ya pasa `BASE_PATH=/alhambrasoap`.
 Si usas un dominio propio, define `SITE_URL` y deja `BASE_PATH` vacío.
 
+## Publicar en Cloudflare (Workers Builds)
+
+`wrangler.jsonc` sirve `./dist` como assets estáticos. En el panel de Cloudflare: **Workers & Pages → Create → Import a repository**,
+elige este repo y usa:
+
+| Campo | Valor |
+|---|---|
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Variables de build | `NODE_VERSION=22`, `SITE_URL=https://alhambrasoap.<tu-subdominio>.workers.dev` |
+
+No definas `BASE_PATH` (el sitio se sirve en la raíz). Cada push a `main` lanza build y deploy.
+Deploy manual desde tu máquina: `npx wrangler login` una vez y luego `npm run deploy`.
+
 ## Enlaces del negocio
 
 Definidos en `src/i18n/ui.ts`:

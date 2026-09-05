@@ -1,0 +1,12 @@
+{
+  // Cloudflare Workers config: serves the static Astro build in ./dist as assets.
+  // Used by `npx wrangler deploy` (Cloudflare Workers Builds runs it after `npm run build`).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "alhambrasoap",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
