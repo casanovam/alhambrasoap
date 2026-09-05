@@ -19,7 +19,6 @@ const es = {
     story: 'Historia',
     collection: 'Colección',
     workshops: 'Talleres',
-    gifts: 'Regalos',
     contact: 'Contacto',
     order: 'Pedir por DM',
   },
@@ -32,7 +31,7 @@ const es = {
     ctaSecondary: 'Pedir por Instagram',
     badge: ['Made in', 'Granada', 'Hand made'],
   },
-  marquee: ['Jabones artesanales', 'Inspiración nazarí', 'Talleres', 'Regalos para profes', 'Pedidos por DM'],
+  marquee: ['Jabones artesanales', 'Inspiración nazarí', 'Talleres', 'Pedidos por DM'],
   story: {
     eyebrow: 'Nuestra historia',
     title: 'No es solo un jabón: es historia, diseño y emoción en tus manos',
@@ -88,17 +87,6 @@ const es = {
     ],
     detail: ['Casi 3 horas', 'Jabonera a juego incluida', 'Brunch marroquí casero'],
     cta: 'Reservar un taller',
-  },
-  gifts: {
-    eyebrow: 'Regalos para profes',
-    title: '¿Aún no has encontrado ese detalle para la profe?',
-    text: 'El Ritual Profe: un regalo que va más allá de lo material. Un ritual pensado para agradecer, cuidar y regalar un momento solo para ella. Hecho con cariño, diferente a lo típico, perfecto para emocionar. Escríbenos “RITUAL PROFE” por DM y te contamos cómo conseguirlo.',
-    cta: 'Escribir “RITUAL PROFE”',
-    more: [
-      { t: 'Bodas y eventos', d: '¿Te casas o tienes un evento importante? Regala Alhambra Soap: un detalle que sorprenderá a quien lo reciba.' },
-      { t: 'Hoteles y clientes VIP', d: '¿Eres un hotel y quieres un regalo muy especial para tus huéspedes? Cuéntanos por DM y lo preparamos.' },
-      { t: 'Día de la Madre', d: 'Pack especial con cuatro jabones y jabonera a juego: la esencia de la Alhambra para mamá.' },
-    ],
   },
   testimonials: {
     eyebrow: 'Testimonios',
@@ -166,7 +154,6 @@ const en: typeof es = {
     story: 'Story',
     collection: 'Collection',
     workshops: 'Workshops',
-    gifts: 'Gifts',
     contact: 'Contact',
     order: 'Order via DM',
   },
@@ -179,7 +166,7 @@ const en: typeof es = {
     ctaSecondary: 'Order on Instagram',
     badge: ['Made in', 'Granada', 'Hand made'],
   },
-  marquee: ['Handmade soaps', 'Nasrid inspiration', 'Workshops', 'Teacher gifts', 'Orders via DM'],
+  marquee: ['Handmade soaps', 'Nasrid inspiration', 'Workshops', 'Orders via DM'],
   story: {
     eyebrow: 'Our story',
     title: 'Not just a soap: history, design and emotion in your hands',
@@ -235,17 +222,6 @@ const en: typeof es = {
     ],
     detail: ['Almost 3 hours', 'Matching soap dish included', 'Homemade Moroccan brunch'],
     cta: 'Book a workshop',
-  },
-  gifts: {
-    eyebrow: 'Teacher gifts',
-    title: 'Still looking for that little something for the teacher?',
-    text: 'The Teacher Ritual: a gift that goes beyond the material. A ritual designed to say thank you, to care, and to give a moment just for her. Made with love, different from the usual, perfect for moving someone. DM us “RITUAL PROFE” and we will tell you how to get it.',
-    cta: 'Message “RITUAL PROFE”',
-    more: [
-      { t: 'Weddings and events', d: 'Getting married or hosting an important event? Give Alhambra Soap: a gift that will surprise whoever receives it.' },
-      { t: 'Hotels and VIP guests', d: 'Are you a hotel looking for a very special gift for your guests? Tell us by DM and we will prepare it.' },
-      { t: "Mother's Day", d: 'Special pack with four soaps and a matching soap dish: the essence of the Alhambra for mum.' },
-    ],
   },
   testimonials: {
     eyebrow: 'Testimonials',
