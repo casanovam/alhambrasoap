@@ -21,8 +21,8 @@ const photo = (name: string) => {
 const portrait = photos['/src/assets/images/belen.jpg']?.default;
 
 const hand = lang === 'es'
-  ? { hero: 'hechos a mano, uno a uno', story: 'recién desmoldada', box: 'lista para regalar', ws: '¡y brunch marroquí!', gallery: 'del taller a tu casa', qr: 'escanéame' }
-  : { hero: 'made by hand, one by one', story: 'fresh out of the mould', box: 'ready to gift', ws: 'and Moroccan brunch!', gallery: 'from the workshop to your home', qr: 'scan me' };
+  ? { hero: 'hechos a mano, uno a uno', story: 'la primera', box: 'lista para regalar', ws: '¡y brunch marroquí!', gallery: 'del taller a tu casa', qr: 'escanéame' }
+  : { hero: 'made by hand, one by one', story: 'the first one', box: 'ready to gift', ws: 'and Moroccan brunch!', gallery: 'from the workshop to your home', qr: 'scan me' };
 
 const productPhotos = [
   { src: 'estrella-de-los-reyes.jpg', alt: { es: 'Jabón octogonal Estrella de los Reyes, estrella azul con centro ocre', en: 'Octagonal Estrella de los Reyes soap, blue star with ochre centre' } },
@@ -75,6 +75,7 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     <div class="story-copy">
       <span class="eyebrow reveal">{d.story.eyebrow}</span>
       <h2 class="title reveal" data-delay="1">{d.story.title}</h2>
+      <p class="subtitle reveal" data-delay="1">{d.story.subtitle}</p>
       <p class="lead reveal" data-delay="2">{d.story.p1}</p>
       <p class="lead reveal" data-delay="2">{d.story.p2}</p>
       <ul class="facts reveal" data-delay="3">
@@ -299,7 +300,8 @@ const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   /* ── Story ── */
   .story { background: var(--ivory); }
   .story-in { display: grid; gap: 3.5rem; align-items: center; }
-  .story-copy .title { margin-block: 1rem 1.5rem; }
+  .story-copy .title { margin-block: 1rem 0.6rem; }
+  .subtitle { font-family: var(--font-display); font-style: italic; font-size: clamp(1.35rem, 2.2vw, 1.7rem); color: var(--cobalt); margin-bottom: 1.5rem; }
   .story-copy .lead + .lead { margin-top: 1rem; }
   .facts { display: flex; flex-wrap: wrap; gap: 2.2rem; margin-top: 2.2rem; }
   .facts li { display: grid; }
